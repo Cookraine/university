@@ -18,12 +18,12 @@ object Platform {
   }
 
 
-  def sendScholarship(): Unit = {
+  def sendScholarship() = {
     _data.getDataListTeachers.foreach { teacher =>
       teacher.getCourses.foreach { course =>
         if (course.getListStudents.nonEmpty) {
           course.getListStudents.foreach { student =>
-            val rate: Double = ScholarshipCalc(student.Grade, course.Price.Amount)
+            val rate: Double = PaymentCalc(student, course.Price.Amount)
             Transaction(rate, student)
           }
         }
@@ -35,7 +35,7 @@ object Platform {
     _data.getDataListTeachers.foreach { teacher =>
       teacher.getCourses.foreach { course =>
         if (course.getListStudents.nonEmpty) {
-          val rate: Double = SalaryCalc(teacher.Rating, course.Price.Amount)
+          val rate: Double = PaymentCalc(teacher, course.Price.Amount)
           Transaction(rate, teacher)
         }
       }
@@ -58,31 +58,31 @@ object Platform {
     }
   }
 
-  def ScholarshipCalc(grade:Int, priceCourse:Double):Double = {
+  def PaymentCalc(person: Human, priceCourse:Double):Double = {
     var rate:Double = 0
-    grade match {
-      case x if x >= 90 && x <= 100 => rate = priceCourse * 1.5
-      case x if x >= 80 && x <= 89 =>  rate = priceCourse * 1
-      case x if x >= 70 && x <= 79 =>  rate = priceCourse * 0.75
-      case x if x >= 60 && x <= 69 =>  rate = priceCourse * 0.5
-      case _ => rate = 0
+    person match {
+      case student: Student =>
+        student.Grade match {
+          case x if x >= 90 && x <= 100 => rate = priceCourse * 1.5
+          case x if x >= 80 && x <= 89 => rate = priceCourse * 1
+          case x if x >= 70 && x <= 79 => rate = priceCourse * 0.75
+          case x if x >= 60 && x <= 69 => rate = priceCourse * 0.5
+          case _ => rate = 0
+        }
+        rate
+      case teacher: Teacher =>
+        teacher.Rating match {
+          case x if x >= 4 && x <= 5 => rate = priceCourse * 1.5
+          case x if x >= 3 && x < 4 => rate = priceCourse * 1
+          case x if x >= 2 && x < 3 => rate = priceCourse * 0.75
+          case x if x >= 1 && x < 2 => rate = priceCourse * 0.5
+          case _ => rate = 0
+        }
+        rate
     }
-    rate
   }
 
-  def SalaryCalc(rating:Double, priceCourse:Double):Double = {
-    var rate:Double = 0
-    rating match {
-      case x if x >= 4 && x <= 5 => rate = priceCourse * 1.5
-      case x if x >= 3 && x < 4 => rate = priceCourse * 1
-      case x if x >= 2 && x < 3 => rate = priceCourse * 0.75
-      case x if x >= 1 && x < 2 => rate = priceCourse * 0.5
-      case _ => rate = 0
-    }
-    rate
-  }
-
-  def tuitionFee(): Unit = {
+  def tuitionFee() = {
     var listTeachers:List[Teacher] = _data.getDataListTeachers
     listTeachers.foreach(teacher=> {
       teacher.getCourses.foreach(course=>{

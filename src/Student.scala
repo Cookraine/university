@@ -46,11 +46,4 @@ class Student(name: String, gender: Char, age: Int, group:String, token:Token, a
        |Address:       ${addr.toString()}
      """.stripMargin
 
-  /*def PaymentForСourse(teach: Teacher, value: Token) {
-    println("[Payment....]")
-
-    this._token = this._token - value
-    Platform.paymentTransaction(value)
-  }*/
-
 }

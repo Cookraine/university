@@ -18,7 +18,7 @@ object Exchange extends Trading {
 
   def get(): (Double, String) = (fiat, token.Token_inf())
 
-  def getTokenPrice():Double = token.Amount / this.fiat
+  def getTokenPrice():Double = this.fiat / token.Amount
 
   override def buy(arg: Token): Unit =  {
     if (token.amount >= arg.amount) {
