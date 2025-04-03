@@ -17,7 +17,6 @@ object CourseCategory {
   case object Programming extends CourseCategory {
     override def name: String = "Programming"
   }
-  def all: List[CourseCategory] = List(SWE, Database, DevOps, Programming)
 }
 
 class Programming (title: String, price: Token, start: Int, end: Int) extends Course(title, CourseCategory.Database, price,  start, end)  {
