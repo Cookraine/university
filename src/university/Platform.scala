@@ -105,7 +105,7 @@ object Platform {
 
   def Teaching(students: List[Student]): Unit = {
     var month: Int = 1
-
+    _data.UpdateCourseAvailability(month)
     while (month <= this._end) {
       println(s"Month: $month")
       if (month == 1) {

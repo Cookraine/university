@@ -26,6 +26,14 @@ class DataList() {
 
   def getTeacherByID(id: Int): Teacher = _dataListTeachers(id)
 
+  def UpdateCourseAvailability(month: Int) = {
+    _dataListTeachers.foreach { teacher =>
+      teacher.getCourses.foreach { course =>
+        course.setAvailable(month)
+      }
+    }
+  }
+
   def EnrollToTeacher(students: List[Student], coursesPerStudent: Int): Unit = {
     val rand = new Random()
     students.foreach { student =>

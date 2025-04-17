@@ -69,7 +69,7 @@ class Teacher(name: String, gender: Char, age: Int, amountStudents: Int,
 
   override def Details(): String = {
     val coursesInfo = _courses.map(course =>
-      s"${course.Title} (Category: ${course.Category.name}, Students: ${course.getListStudents.length})"
+      s"${course.Title} (Category: ${course.Category}, Availability: ${course.Available}, Students: ${course.getListStudents.length})"
     ).mkString("\n")
 
     s"""
