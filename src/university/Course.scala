@@ -57,14 +57,10 @@ abstract class Course(title: String, category: CourseCategory, price: Token, sta
 object Course {
   def apply(title: String, category: CourseCategory, price: Token, start: Int, end: Int): Course = {
     category match {
-      case CourseCategory.SWE =>
-        new SWE(title, price, start, end)
-      case CourseCategory.Database =>
-        new Database(title, price, start, end)
-      case CourseCategory.DevOps =>
-        new DevOps(title, price, start, end)
-      case CourseCategory.Programming =>
-        new Programming(title, price, start, end)
+      case CourseCategory.SWE => new SWE(title, price, start, end)
+      case CourseCategory.Database => new Database(title, price, start, end)
+      case CourseCategory.DevOps => new DevOps(title, price, start, end)
+      case CourseCategory.Programming => new Programming(title, price, start, end)
     }
   }
 }

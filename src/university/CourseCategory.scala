@@ -1,21 +1,21 @@
 package university
 
 sealed trait CourseCategory {
-  def name: String
+  def category: String
 }
 
 object CourseCategory {
   case object SWE extends CourseCategory {
-    override def name: String = "Software Engineering"
+    override def category: String = "Software Engineering"
   }
   case object Database extends CourseCategory {
-    override def name: String = "Database Design & Development"
+    override def category: String = "Database Design & Development"
   }
   case object DevOps extends CourseCategory {
-    override def name: String = "DevOps"
+    override def category: String = "DevOps"
   }
   case object Programming extends CourseCategory {
-    override def name: String = "Programming"
+    override def category: String = "Programming"
   }
 }
 
